@@ -5,6 +5,7 @@ let operator=null;
 let btns= document.querySelectorAll(".digit")
 let displayText= document.querySelector(".display h1");
 let chosenOperator= document.querySelectorAll(".operators");
+let equal= document.querySelector("#equal");
 
 
 function add(a,b){return Number(a)+Number(b)};
@@ -44,6 +45,7 @@ btns.forEach((btn) =>{
     });
 });
 
+
 chosenOperator.forEach((optr) =>{
     optr.addEventListener("click", (e)=>{
         
@@ -59,5 +61,14 @@ chosenOperator.forEach((optr) =>{
         }
         operator= e.target.textContent;
     });
+});
+
+equal.addEventListener("click", (e) =>{
+    if(a != null && b != null){
+        let result= operate(operator,a,b);
+        updateDisplay(String(result));
+        a=null;
+        b=null;
+    }
 });
 
