@@ -12,7 +12,10 @@ let cancel= document.querySelector("#cancel");
 function add(a,b){return Number(a)+Number(b)};
 function subtract(a,b){return Number(a)-Number(b)};
 function multiply(a,b){return Number(a)*Number(b)};
-function divide(a,b){return Number(a)/Number(b)};
+function divide(a,b){
+    if(b== 0) return "Divide by Zero";
+    return Number(a)/Number(b)
+};
 function operate(operator, a, b){
     switch (operator){
         case "+":
@@ -54,8 +57,9 @@ chosenOperator.forEach((optr) =>{
             a=b;
             b= null;
         }
-        else{
-            let result= Math.round(operate(operator, a, b) * 10000) / 10000;
+        else if(b != null){
+            let result= operate(operator,a,b);
+            if(result != "Divide by Zero") result= Math.round(operate(operator,a,b) * 10000) / 10000;
             b=null;
             a=String(result);
             updateDisplay(a);
@@ -67,7 +71,8 @@ chosenOperator.forEach((optr) =>{
 
 equal.addEventListener("click", (e) =>{
     if(a != null && b != null){
-        let result= Math.round(operate(operator,a,b) * 10000) / 10000;
+        let result= operate(operator,a,b);
+        if(result != "Divide by Zero") result= Math.round(operate(operator,a,b) * 10000) / 10000;
         updateDisplay(String(result));
         a=null;
         b=null;
