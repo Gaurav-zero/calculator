@@ -6,6 +6,7 @@ let btns= document.querySelectorAll(".digit")
 let displayText= document.querySelector(".display h1");
 let chosenOperator= document.querySelectorAll(".operators");
 let equal= document.querySelector("#equal");
+let cancel= document.querySelector("#cancel");
 
 
 function add(a,b){return Number(a)+Number(b)};
@@ -54,7 +55,7 @@ chosenOperator.forEach((optr) =>{
             b= null;
         }
         else{
-            let result= operate(operator, a, b);
+            let result= Math.round(operate(operator, a, b) * 10000) / 10000;
             b=null;
             a=String(result);
             updateDisplay(a);
@@ -63,12 +64,20 @@ chosenOperator.forEach((optr) =>{
     });
 });
 
+
 equal.addEventListener("click", (e) =>{
     if(a != null && b != null){
-        let result= operate(operator,a,b);
+        let result= Math.round(operate(operator,a,b) * 10000) / 10000;
         updateDisplay(String(result));
         a=null;
         b=null;
     }
+});
+
+cancel.addEventListener("click", (e) =>{
+    a=null;
+    b=null;
+    operator=null;
+    updateDisplay(0);
 });
 
