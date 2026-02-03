@@ -7,6 +7,7 @@ let displayText= document.querySelector(".display h1");
 let chosenOperator= document.querySelectorAll(".operators");
 let equal= document.querySelector("#equal");
 let cancel= document.querySelector("#cancel");
+let decimal= document.querySelector("#decimal");
 
 
 function add(a,b){return Number(a)+Number(b)};
@@ -34,7 +35,7 @@ function operate(operator, a, b){
 }
 function storeDigit(value){
     if(b== null) b=value;
-    else b= b+value;
+    else if(b.indexOf(".") == -1 || b.indexOf(".") == b.length-1) b= b+value;
 }
 
 function updateDisplay(value){
@@ -47,6 +48,13 @@ btns.forEach((btn) =>{
         storeDigit(e.target.textContent);
         updateDisplay(b);
     });
+});
+
+decimal.addEventListener("click", (e)=>{
+    if(!b.includes(".")){
+        storeDigit(".");
+        updateDisplay(b);
+    }
 });
 
 
