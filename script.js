@@ -8,6 +8,7 @@ let chosenOperator= document.querySelectorAll(".operators");
 let equal= document.querySelector("#equal");
 let cancel= document.querySelector("#cancel");
 let decimal= document.querySelector("#decimal");
+let backspace= document.querySelector("#backspace");
 
 
 function add(a,b){return Number(a)+Number(b)};
@@ -36,6 +37,19 @@ function operate(operator, a, b){
 function storeDigit(value){
     if(b== null) b=value;
     else if(b.indexOf(".") == -1 || b.indexOf(".") == b.length-1) b= b+value;
+}
+
+function removeDigit(){
+    if(b != null){
+        b=b.split("").splice(0, b.length-1).join("");
+        if(b.length != 0)updateDisplay(b);
+        else updateDisplay(0);
+    }
+    else if(a != null){
+        a=a.split("").splice(0, a.length-1).join("");
+        if(a.length != 0)updateDisplay(a);
+        else updateDisplay(0);
+    }
 }
 
 function updateDisplay(value){
@@ -92,5 +106,9 @@ cancel.addEventListener("click", (e) =>{
     b=null;
     operator=null;
     updateDisplay(0);
+});
+
+backspace.addEventListener("click", (e) => {
+    removeDigit();
 });
 
